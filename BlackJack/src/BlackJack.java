@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class BlackJack {
     private class Card {
@@ -47,8 +50,35 @@ public class BlackJack {
     int playerSum;
     int playerAceCount;
 
+    // interface
+    int boardWidth = 700;
+    int boardHeight = 700;
+
+    JFrame frame = new JFrame("Black Jack");
+    JPanel gamPanel = new JPanel();
+    JPanel buttoPanel = new JPanel();
+    JButton hitButton = new JButton("Hit");
+    JButton stayButton = new JButton("Stay");
+
     BlackJack() {
         startGame();
+
+        frame.setVisible(true);
+        frame.setSize(boardWidth, boardHeight);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        gamPanel.setLayout(new BorderLayout());
+        gamPanel.setBackground(new Color(53, 101, 77));
+        frame.add(gamPanel);
+
+        hitButton.setFocusable(false);
+        buttoPanel.add(hitButton);
+        stayButton.setFocusable(false);
+        buttoPanel.add(stayButton);
+        frame.add(buttoPanel, BorderLayout.SOUTH);
+
     }
 
     public void startGame() {

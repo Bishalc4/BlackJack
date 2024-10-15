@@ -33,14 +33,19 @@ public class BlackJack {
         }
     }
 
+    ArrayList<Card> deck;
+    Random random = new Random(); // shuffling deck
+
     // dealer
     Card hiddenCard;
     ArrayList<Card> dealerHand;
     int dealerSum;
     int dealerAceCount;
 
-    ArrayList<Card> deck;
-    Random random = new Random(); // shuffling deck
+    // player
+    ArrayList<Card> playerHand;
+    int playerSum;
+    int playerAceCount;
 
     BlackJack() {
         startGame();
@@ -75,6 +80,25 @@ public class BlackJack {
         System.out.println(dealerHand);
         System.out.println(dealerSum);
         System.out.println(dealerAceCount);
+
+        // player hand
+        playerHand = new ArrayList<Card>();
+        playerSum = 0;
+        playerAceCount = 0;
+
+        for (int i = 0; i < 2; ++i) {
+            card = deck.remove(deck.size() - 1);
+            playerSum += card.getValue();
+            if (card.isAce()) {
+                dealerAceCount += 1;
+            }
+            playerHand.add(card);
+        }
+
+        System.out.println("Player");
+        System.out.println(playerHand);
+        System.out.println(playerSum);
+        System.out.println(playerAceCount);
 
     }
 

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class BlackJack {
     private class Card {
@@ -18,6 +19,7 @@ public class BlackJack {
     }
 
     ArrayList<Card> deck;
+    Random random = new Random(); // shuffling deck
 
     BlackJack() {
         startGame();
@@ -26,6 +28,7 @@ public class BlackJack {
     public void startGame() {
 
         buildDeck(); // building deck
+        shuffleDeck();
 
     }
 
@@ -42,6 +45,19 @@ public class BlackJack {
         }
 
         System.out.println("BUILD DECK:");
+        System.out.println(deck);
+    }
+
+    public void shuffleDeck() {
+        for (int i = 0; i < deck.size(); ++i) {
+            int j = random.nextInt(deck.size());
+            Card currCard = deck.get(i);
+            Card randomCard = deck.get(j);
+            deck.set(i, randomCard);
+            deck.set(j, currCard);
+        }
+
+        System.out.println("AFTER SHUFFLE");
         System.out.println(deck);
     }
 

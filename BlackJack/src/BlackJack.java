@@ -16,7 +16,28 @@ public class BlackJack {
             return value + "-" + type;
         }
 
+        public int getValue() {
+            if ("JQKA".contains(value)) {
+                if (value == "A") {
+                    return 11;
+                }
+
+                return 10; // return value 10 for J,Q,K
+            }
+
+            return Integer.parseInt(value); // retrun value 2-10
+        }
+
+        public boolean isAce() {
+            return value == "A";
+        }
     }
+
+    // dealer
+    Card hiddenCard;
+    ArrayList<Card> dealerHand;
+    int dealerSum;
+    int dealerAceCount;
 
     ArrayList<Card> deck;
     Random random = new Random(); // shuffling deck
@@ -28,7 +49,32 @@ public class BlackJack {
     public void startGame() {
 
         buildDeck(); // building deck
-        shuffleDeck();
+        shuffleDeck(); // shuffling the deck
+
+        // dealer hand
+        dealerHand = new ArrayList<Card>();
+        dealerSum = 0;
+        dealerAceCount = 0;
+
+        hiddenCard = deck.remove(deck.size() - 1); // remove card at the last index
+        dealerSum += hiddenCard.getValue();
+        if (hiddenCard.isAce()) {
+            dealerAceCount += 1;
+        }
+
+        Card card = deck.remove(deck.size() - 1);
+        dealerSum += card.getValue();
+        if (card.isAce()) {
+            dealerAceCount += 1;
+        }
+
+        dealerHand.add(card);
+
+        System.out.println("DEALER");
+        System.out.println(hiddenCard);
+        System.out.println(dealerHand);
+        System.out.println(dealerSum);
+        System.out.println(dealerAceCount);
 
     }
 
